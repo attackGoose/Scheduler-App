@@ -94,7 +94,7 @@ class HomePage extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     //ui design, learning how to make a 
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [ 
           //this part I might change later into its own widget because its going to be a major portion
@@ -108,5 +108,3 @@ class HomePage extends StatefulWidget {
     )
   } 
 }
-
-class 
