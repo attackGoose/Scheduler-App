@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TodoListProvider extends ChangeNotifier {
   List<String> todoListItem = [];
@@ -31,6 +30,9 @@ class EventListProvider extends ChangeNotifier {
   }
 
   void eventNotify() {
-    
+    //this will basically send the user a notification once an event is happening.
+    //i can check events every minute to make it a bit more efficient rather than every milisecond
+    //https://www.courier.com/guides/flutter-notifications/
   }
 }
+

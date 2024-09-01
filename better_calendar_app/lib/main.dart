@@ -15,10 +15,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(
+        ChangeNotifierProvider(
           create: (context) => CalenderModel() //this allows the entire application to use this provider
         ),
-        Provider(
+        ChangeNotifierProvider(
           create: (context) => DateModel()
         ),
       ],
@@ -40,7 +40,9 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Hello World!');
+    return const Center(
+      child: Text('Hello World!')
+    );
   }
 }
 
