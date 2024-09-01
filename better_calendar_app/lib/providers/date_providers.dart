@@ -13,15 +13,18 @@ class CalDates extends ChangeNotifier {
 //this starts off 
 
 
-  late DateTime currDate;
+  DateTime currDate = DateTime.now();
 
   //add something to watch both of these values.
   //this class is the backend of the calendar,
   //which displays the values that are present here
-  late TodoList todoList;
-  EventList currDayEvents = EventList();
+  
+  // late TodoList todoList;
+  // EventList currDayEvents = EventList();
+  // not sure if these values are needed
 
-  void changeCurrentDay(int date) {
+
+  void changeViewDay(DateTime date) {
     currDate = date;
     notifyListeners();
   }
@@ -38,20 +41,34 @@ class CalDates extends ChangeNotifier {
 class TodoList extends ChangeNotifier {
   
   DateTime currDate = DateTime.now();
-  List<String> todoListItems = [];
-  todoListItems.insert(0, prevTodoList);
+  Map<DateTime, List<String>> todoListItems = {};
 
-  void addToTodoList(String newTodoItem) {
-    todoListItems.insert(0, newTodoItem);
+  Map getTodoList(DateTime day) {
+    return todoListItems;
+  }
+
+  void addToTodoList(String item) {
+    //todoListItems[DateTime.now()] = todoListItems[DateTime.now()].add(item);
+    (todoListItems[DateTime.now()] == null) ? todoListItems[DateTime.now()] = [] : todoListItems[DateTime.now()];
+    todoListItems.update(
+      DateTime.now(),
+      (currTodos) {
+        currTodos.add(item);
+        return currTodos;
+      },
+    );
     notifyListeners();
     //just adds an item to the end of that day's todo list, nothing too complicated
   }
 
   void completeToDo(int todoIndexNumber) { //gets rid of completed todos
-    todoListItems.removeAt(todoIndexNumber);
+    todoListItems[DateTime.now()]!.removeAt(todoIndexNumber);
     notifyListeners();
   }
 
+  void carryOverTodosFromPrev(DateTime) {
+
+  }
 }
 
 class EventList extends ChangeNotifier {
