@@ -1,9 +1,12 @@
+import 'package:better_calendar_app/pages/date_events.dart';
+import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() { //this runs the app, and in the run app, we can choose what we want to run
   runApp(const MaterialApp( //runs the main app
-    debugShowCheckedModeBanner: false,
+    //debugShowCheckedModeBanner: false,
     home: MainApp()
   ));
 }
@@ -16,10 +19,10 @@ class MainApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => CalenderModel() //this allows the entire application to use this provider
+          create: (context) => TodoList() //this allows the entire application to use this provider
         ),
         ChangeNotifierProvider(
-          create: (context) => DateModel()
+          create: (context) => EventList()
         ),
       ],
       child: const MaterialApp(
@@ -27,37 +30,31 @@ class MainApp extends StatelessWidget {
           body: Center(
             child: Calendar(),
           ),
+          
         ),
+
       )
     );
   }
 }
 
-class Calendar extends StatelessWidget {
+class Calendar extends StatefulWidget {
   const Calendar({
     super.key,
   });
 
+//for tomorrow, learn and impliment this in a stateful widget
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Hello World!')
+    return Center(
+      child: TableCalendar(
+        firstDay: DateTime.utc(2024, 9, 1),
+        lastDay: DateTime.utc(2044, 9, 1),
+        focusedDay: DateTime.now(),)
     );
   }
 }
 
-class CalenderModel extends ChangeNotifier {
-
-  Map<Widget, Widget> calenderScreen = {};
-}
-
-class DateModel extends ChangeNotifier {
-  List<String> todoListItem = [];
-
-  //this will contain one string for the title of the event, and a list for the location and and time
-  List<Map> eventListItem = [];
-  
-}
 
 //previous code: will use later as a reference for what to work on later
 /*
