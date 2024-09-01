@@ -2,39 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalDates extends ChangeNotifier {
-  //this class will have both a todolist and an event attribute, both class's providers are listed below
-  //each day will have these two attributes (which is a given), but the values will be unique to each day
-  //to save on space and efficiency, first all the previous days will not be viewable, but future days will
-  //events on past days will also be deleted which is a given since they don't exist anymore
 
-//if not done this way then i will need to have a class that represents the dates, todos and events in the day,
-//and something to change the date for the future
-
-//this starts off 
-
-
+  //this class stores the days
   DateTime currDate = DateTime.now();
 
-  //add something to watch both of these values.
-  //this class is the backend of the calendar,
-  //which displays the values that are present here
-  
-  // late TodoList todoList;
-  // EventList currDayEvents = EventList();
-  // not sure if these values are needed
+  DateTime getCurrDate() {
+    return currDate;
+  }
 
+  void updateCurrDate(DateTime day) { 
+    //this method isgoing to also be used by the other classes to update the curr date
+    currDate = day;
+  }
 
-  void changeViewDay(DateTime date) {
-    currDate = date;
-    notifyListeners();
-  }
-  
-  List getTodoList() {
-    return todoList.todoListItems;
-  }
-  List getEventList() {
-    return currDayEvents.eventListItems;
-  }
+  //the actual front end app is going to use these methods to have the calender be nice nice
 
 }
 
@@ -87,3 +68,45 @@ class EventList extends ChangeNotifier {
   }
 }
 
+
+
+
+//previous CalDates class
+
+//class CalDates extends ChangeNotifier {
+//   //this class will have both a todolist and an event attribute, both class's providers are listed below
+//   //each day will have these two attributes (which is a given), but the values will be unique to each day
+//   //to save on space and efficiency, first all the previous days will not be viewable, but future days will
+//   //events on past days will also be deleted which is a given since they don't exist anymore
+
+// //if not done this way then i will need to have a class that represents the dates, todos and events in the day,
+// //and something to change the date for the future
+
+// //this starts off 
+
+
+//   DateTime currDate = DateTime.now();
+
+//   //add something to watch both of these values.
+//   //this class is the backend of the calendar,
+//   //which displays the values that are present here
+  
+//   // late TodoList todoList;
+//   // EventList currDayEvents = EventList();
+//   // not sure if these values are needed
+
+//   var todoList = 
+
+
+//   void changeViewDay(DateTime date) {
+//     currDate = date;
+//     notifyListeners();
+//   }
+  
+//   List getTodoList() {
+//     return todoList.todoListItems;
+//   }
+//   List getEventList() {
+//     return currDayEvents.eventListItems;
+//   }
+//}

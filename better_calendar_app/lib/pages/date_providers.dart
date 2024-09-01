@@ -1,4 +1,3 @@
 import 'package:flutter/material.dart';
 
-
-//learn how to create different pages tomorrow
+//front end stuff for tmr
