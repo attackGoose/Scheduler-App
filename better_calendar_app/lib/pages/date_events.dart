@@ -16,7 +16,7 @@ class _EventsPageState extends State<EventsPage> {
     return Scaffold();
   }
 
-  void _currentTodoItem() { //shows you which todo item you're editing at the current moment
+  void currentTodoItem() { //shows you which todo item you're editing at the current moment
 
-  }
+  } //actually i'll add this in the front end since i can just use a stateful widget and edit it in there
 }

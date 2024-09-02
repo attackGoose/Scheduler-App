@@ -52,6 +52,7 @@ class TodoList extends ChangeNotifier {
     todoListItems.clear();
   }
 }
+
 class EventList extends ChangeNotifier {
   DateTime currDate = CalDates.currDate;
   Map<DateTime, Map<int, List>> events = {};
@@ -64,7 +65,8 @@ class EventList extends ChangeNotifier {
   }
 
   void removeEventItem(int time) {
-
+    events[currDate]![time]!.clear();
+    notifyListeners();
   }
 
   // void eventNotify() {
