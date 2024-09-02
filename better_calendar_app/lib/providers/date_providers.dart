@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+//I'm using a multiprovider here and connecting
+//them as it it would make the code more readable
+//and it would also make the backend a connected
+//database in a way.
+
 class CalDates extends ChangeNotifier {
 
   //this class stores the days
@@ -11,7 +16,7 @@ class CalDates extends ChangeNotifier {
 
   void updateCurrDate(DateTime day) { 
     //this method isgoing to also be used by the other classes to update the curr date
-    currDate = day;
+    currDate = day; //this is a static variable so no need for the notifylistener() method
   } //use this method to switch between the days in the calendar
 
   //the actual front end app is going to use these methods to have the calender be nice nice

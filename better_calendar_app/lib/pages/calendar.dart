@@ -18,9 +18,21 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const CalendarTitleBar(),
+        title: const Text("Organizational Calendar App"),
+        titleSpacing: 00.0,
+        centerTitle: true,
+        toolbarHeight: 60.2,
+        toolbarOpacity: 0.6,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25)
+          )
+        ),
+        elevation: 0.8,
+        backgroundColor: const Color.fromRGBO(120, 181, 255, 0.8),
       ),
-      backgroundColor: const Color.fromARGB(255, 35, 81, 76),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: 
         TableCalendar(
           firstDay: DateTime.utc(2024, 9, 1),
@@ -29,30 +41,5 @@ class _CalendarPageState extends State<CalendarPage> {
 
         )
     );
-  }
-
-
-
-}
-
-class PrevMonthButton extends StatelessWidget {
-  const PrevMonthButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: onPressed, child: child);
-  }
-}
-
-class CalendarTitleBar extends StatelessWidget {
-  const CalendarTitleBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BackButton(child: const Text(""));
   }
 }
