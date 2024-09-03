@@ -7,10 +7,7 @@ import 'package:table_calendar/table_calendar.dart';
 //this is also the home page of the app
 
 void main() { //this runs the app, and in the run app, we can choose what we want to run
-  runApp(const MaterialApp( //runs the main app
-    //debugShowCheckedModeBanner: false,
-    home: MainApp()
-  ));
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -30,7 +27,9 @@ class MainApp extends StatelessWidget {
           create: (context) => CalDates()
         )
       ],
+      //have this connect to the home_page.dart page
       child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: Center(
             child: Calendar(),
@@ -42,24 +41,6 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-
-class Calendar extends StatefulWidget {
-  const Calendar({
-    super.key,
-  });
-
-//for tomorrow, learn and impliment this in a stateful widget
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: TableCalendar(
-        firstDay: DateTime.utc(2024, 9, 1),
-        lastDay: DateTime.utc(2044, 9, 1),
-        focusedDay: DateTime.now(),)
-    );
-  }
-}
-
 
 //previous code: will use later as a reference for what to work on later
 /*

@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 //learn how to create different pages in an app tomorrow, aka front end stuff which is for tmr
+//add a bottom nav bar for this
+
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});

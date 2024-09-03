@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 //front end stuff for tmr
+//add a bottom nav bar for this
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});

@@ -21,15 +21,34 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: Text("Today's Schedule"),
       ),
-      body: Center(
-          child: TextButton(
-            onPressed: () {},
-            child: const Text("Calendar Page"),
-          ),
-      ),
-      bottomNavigationBar: BottomAppBar(),);
+      body: Row(
+        children: [
+          Column(
+          children: [
+            Container(
+            color: const Color.fromRGBO(255, 249, 233, 0.694),
+            alignment: const Alignment(24, 74), //random numbers, change later
+            child: TextButton(
+              onPressed: () {setState() => { //switch the state of the app to calender
+                //have this connect to the calendar page
+              }},
+              child: const Text("Calendar Page"),
+              ),
+            ),
+            Container( //this will have text for the todo list
+              color: const Color.fromRGBO(),
+            ),
+            Container( //this will have the button for the events page
+
+            )
+
+          ],
+        
+        ),
+        ]
+      );
   }
   
 }
