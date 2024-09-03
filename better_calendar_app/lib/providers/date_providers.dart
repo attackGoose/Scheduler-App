@@ -28,7 +28,7 @@ class CalDates extends ChangeNotifier {
 class TodoList extends ChangeNotifier {
   
   DateTime currDate = CalDates.currDate;
-  Map<DateTime, List> todoListItems = {};
+  static Map<DateTime, List> todoListItems = {};
 
   Map getTodoList(DateTime day) {
     return todoListItems;

@@ -28,8 +28,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Today's Schedule"),
       ),
-      body: Row(
+
+      body: Row( //
         children: [
+          
+          //first column, has 3 items, button for calendar, list for todo, and button for event
           Column(
           children: [
             Container(
@@ -44,12 +47,24 @@ class _HomePageState extends State<HomePage> {
               child: const Text("Calendar"),
               ),
             ),
+
+            //todo list
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
             alignment: const Alignment(24, 74), //random numbers, change later
-            child: const Text("Calendar Page"),
+            child: ListView(
+              children:  [
+                ListTile("get first todo item"), //i want the icon to be a dot for todo
+                ListTile("get second todo item"),
+                (TodoList.todoListItems[CalDates.currDate]![3]) ? 
+                 ListTile("+ blank more items") : Text("No More Events For Today")
+                  
+              ],
+            )
             ),
+
+            //events button
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
@@ -64,13 +79,18 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+
+        //second column, has tday's date, todo button, and upcoming events
         Column(
           children: [
+            //prints today's date and styles it
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: Text("Date: $today"),
-              ),
+            ),
+            
+            //button to take you to the todo page to add or edit tasks
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
@@ -84,25 +104,29 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text("Todos")),
             ),
+
+            // text to display the first two upcoming events
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
               children: const [
-                Text(); //gets the list of today's events (first 2 upcoming events)
+                ListTile("get first event item"), //i want the icon to be a star or dash for events
+                ListTile("get second event item") //gets the list of today's events (first 2 upcoming events)
               ],
             ),
             ),
-            ),
-        
-          ],
+          ]
         ),
-        ]
-      )
+        
+        ],
+      ),
+      //i might add a bottom navigation bar in the future but for now, eh
     );
   }
   
 }
+
 //note to self, tomorrow, try to think from scratch what I want this to look like
 //and try to think about pieceing all these parts together in a different way from the way I'm doing it now
 //try to piece these things together in a different way than I'm doing right now.
