@@ -1,5 +1,7 @@
+import 'package:better_calendar_app/main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:better_calendar_app/providers/date_providers.dart';
+import 'package:provider/provider.dart';
 //this is th starting screen. "Hello" at the top
 //and "Home" on the appbar
 // below are 3 buttons listed in vertical or
@@ -19,6 +21,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var getToday = context.watch<CalDates>();
+    var today = getToday.printToday;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Today's Schedule"),
@@ -33,22 +38,68 @@ class _HomePageState extends State<HomePage> {
             child: TextButton(
               onPressed: () {setState() => { //switch the state of the app to calender
                 //have this connect to the calendar page
-              }},
-              child: const Text("Calendar Page"),
+                //change screen to calendar
+              };
+              },
+              child: const Text("Calendar"),
               ),
             ),
-            Container( //this will have text for the todo list
-              color: const Color.fromRGBO(),
+            Container(
+            color: const Color.fromRGBO(255, 249, 233, 0.694),
+            //style it more later
+            alignment: const Alignment(24, 74), //random numbers, change later
+            child: const Text("Calendar Page"),
             ),
-            Container( //this will have the button for the events page
-
-            )
-
+            Container(
+            color: const Color.fromRGBO(255, 249, 233, 0.694),
+            alignment: const Alignment(24, 74), //random numbers, change later
+            child: TextButton(
+              onPressed: () {setState() => { //switch the state of the app to calender
+                //have this connect to the calendar page
+                //change screen to calendar
+              };
+              },
+              child: const Text("Events"),
+              ),
+            ),
           ],
+        ),
+        Column(
+          children: [
+            Container(
+            color: const Color.fromRGBO(255, 249, 233, 0.694),
+            alignment: const Alignment(24, 74), //random numbers, change later
+            child: Text("Date: $today"),
+              ),
+            Container(
+            color: const Color.fromRGBO(255, 249, 233, 0.694),
+            //style it more later
+            alignment: const Alignment(24, 74), //random numbers, change later
+            child: TextButton(
+              onPressed: () {
+                setState() => { //switch the state of the app to calender
+                //have this connect to the calendar page
+                //change screen to calendar
+              };
+              },
+              child: const Text("Todos")),
+            ),
+            Container(
+            color: const Color.fromRGBO(255, 249, 233, 0.694),
+            alignment: const Alignment(24, 74), //random numbers, change later
+            child: ListView(
+              children: const [
+                Text(); //gets the list of today's events (first 2 upcoming events)
+              ],
+            ),
+            ),
+            ),
         
+          ],
         ),
         ]
-      );
+      )
+    );
   }
   
 }

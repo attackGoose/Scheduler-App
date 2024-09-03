@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 //I'm using a multiprovider here and connecting
 //them as it it would make the code more readable
 //and it would also make the backend a connected
@@ -9,6 +9,12 @@ class CalDates extends ChangeNotifier {
 
   //this class stores the days
   static DateTime currDate = DateTime.now();
+  final dateFormatter = DateFormat('MM-dd-yyyy');
+  late String printToday;
+
+  getToday() async {
+    printToday = dateFormatter.format(currDate);
+  }
 
   void updateCurrDate(DateTime day) { 
     //this method isgoing to also be used by the other classes to update the curr date
