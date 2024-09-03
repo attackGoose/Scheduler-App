@@ -1,5 +1,9 @@
+// ignore: unused_import
+import 'package:better_calendar_app/main.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 //learn how to create different pages in an app tomorrow, aka front end stuff which is for tmr
@@ -12,14 +16,20 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  DateTime currDay = CalDates.getCurrDate();
+  DateTime _selectDay = CalDates.currDate;
+  static DateTime _focusDay = CalDates.currDate;
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+
+  //provider: .read is just to get the value which I can then use, which is what I need
+  // .watch is to listen to new values, to access the data
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Organizational Calendar App"),
-        titleSpacing: 00.0,
+        titleSpacing: 0.0,
         centerTitle: true,
         toolbarHeight: 60.2,
         toolbarOpacity: 0.6,
@@ -33,13 +43,40 @@ class _CalendarPageState extends State<CalendarPage> {
         backgroundColor: const Color.fromRGBO(120, 181, 255, 0.8),
       ),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: 
-        TableCalendar(
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color.fromRGBO(255, 230, 160, 0.729)
+        ),
+        child: TableCalendar(
           firstDay: DateTime.utc(2024, 9, 1),
           lastDay: DateTime.utc(2044, 9, 1),
-          focusedDay: currDay,
+          focusedDay: DateTime.now(),
+          selectedDayPredicate: (day) {
+            return isSameDay(_selectDay, day);
+          },
+          onDaySelected: (selectedDay, focusDay) {
+            setState(() { //this basically tells the widget that a change has been made to it, 
+                  //        and to reload the widget to impliment these changes
+              _selectDay = selectedDay;
+              _focusDay = focusDay;
+            }
+            );
+          },
+          calendarFormat: _calendarFormat,
+          onFormatChanged: (format) {
+            setState(() {
+              _calendarFormat = format;
+            });
+          },
+          )
 
-        )
+      )
     );
   }
 }
+//() => expression shortcut: basically does:
+// () {
+//   expression
+// }
+
+//Todos: add button functionality

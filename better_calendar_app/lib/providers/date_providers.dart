@@ -10,10 +10,6 @@ class CalDates extends ChangeNotifier {
   //this class stores the days
   static DateTime currDate = DateTime.now();
 
-  static DateTime getCurrDate() {
-    return currDate;
-  }
-
   void updateCurrDate(DateTime day) { 
     //this method isgoing to also be used by the other classes to update the curr date
     currDate = day; //this is a static variable so no need for the notifylistener() method

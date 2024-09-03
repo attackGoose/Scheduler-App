@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+//this is also the home page of the app
+
 void main() { //this runs the app, and in the run app, we can choose what we want to run
   runApp(const MaterialApp( //runs the main app
     //debugShowCheckedModeBanner: false,
@@ -24,6 +26,9 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => EventList()
         ),
+        ChangeNotifierProvider(
+          create: (context) => CalDates()
+        )
       ],
       child: const MaterialApp(
         home: Scaffold(
