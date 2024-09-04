@@ -10,11 +10,8 @@ class CalDates extends ChangeNotifier {
   //this class stores the days
   static DateTime currDate = DateTime.now();
   final dateFormatter = DateFormat('MM-dd-yyyy');
-  late String printToday;
-
-  getToday() async {
-    printToday = dateFormatter.format(currDate);
-  }
+  late String printToday = dateFormatter.format(currDate);
+  
 
   void updateCurrDate(DateTime day) { 
     //this method isgoing to also be used by the other classes to update the curr date
@@ -62,18 +59,25 @@ class TodoList extends ChangeNotifier {
 
 class EventList extends ChangeNotifier {
   DateTime currDate = CalDates.currDate;
-  Map<DateTime, Map<int, List>> events = {};
+  static Map<DateTime, List> events = {};
+  //the datetime should also contain a time value somewhere
+  //day: time: event details
   //make sure that the order is title, Travel time, timeStart, end time, event details
 
-  void addEventItem(int time, List event) {
-    Map<int, List> entry = {time: event};
-    events[currDate]!.addEntries(entry as Iterable<MapEntry<int, List>>);
+  void addEventItem(DateTime time, List event) {
+    //this will be replaced by a LinkedHashMap in the future to improve efficiency
+    events[time]!.add(event);
     notifyListeners();
   }
 
   void removeEventItem(int time) {
     events[currDate]![time]!.clear();
     notifyListeners();
+  }
+
+  //the null thing is really annoying, helpful but annying
+  static List getEventsForSelectDay(DateTime day) {
+      return events[day]!;
   }
 
   // void eventNotify() {

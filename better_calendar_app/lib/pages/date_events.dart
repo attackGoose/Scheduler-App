@@ -14,7 +14,7 @@ class _EventsPageState extends State<EventsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 
   void currentTodoItem() { //shows you which todo item you're editing at the current moment

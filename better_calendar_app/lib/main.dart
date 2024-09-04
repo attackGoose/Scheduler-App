@@ -1,4 +1,5 @@
 import 'package:better_calendar_app/pages/date_events.dart';
+import 'package:better_calendar_app/pages/home_page.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,8 @@ import 'package:table_calendar/table_calendar.dart';
 void main() { //this runs the app, and in the run app, we can choose what we want to run
   runApp(const MainApp());
 }
+
+//https://blog.logrocket.com/creating-multi-page-app-flutter/
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -30,12 +33,7 @@ class MainApp extends StatelessWidget {
       //have this connect to the home_page.dart page
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Center(
-            child: Calendar(),
-          ),
-          
-        ),
+        home: HomePage()
 
       )
     );

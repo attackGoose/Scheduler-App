@@ -30,7 +30,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Organizational Calendar App"),
+        title: const Text("Calendar Page"),
         titleSpacing: 0.0,
         centerTitle: true,
         toolbarHeight: 60.2,
@@ -53,7 +53,7 @@ class _CalendarPageState extends State<CalendarPage> {
           firstDay: DateTime.utc(2024, 9, 1),
           lastDay: DateTime.utc(2044, 9, 1),
           focusedDay: DateTime.now(),
-          selectedDayPredicate: (day) {
+          selectedDayPredicate: (day) { //checks the selected day is the same as the current viewing date
             return isSameDay(_selectDay, day);
           },
           onDaySelected: (selectedDay, focusDay) {
@@ -65,10 +65,20 @@ class _CalendarPageState extends State<CalendarPage> {
             );
           },
           calendarFormat: _calendarFormat,
-          onFormatChanged: (format) {
+          onFormatChanged: (format) { 
+            //dynamically updates visible calendar format
             setState(() {
               _calendarFormat = format;
             });
+          },
+          //makes sure that the calendar's focus day doesn't reset to its initial state before month change
+          onPageChanged: (focusDay) {
+            //not using setState() because if the widget gets rebuilt (via page change) later on, it will use the proper focusDay
+            _focusDay = focusDay;
+          },
+          //praying that this works
+          eventLoader: (day) {
+            return EventList.getEventsForSelectDay(_focusDay);
           },
           )
 

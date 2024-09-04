@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 //this should be used to navigate between the pages
 
+//there's a nullvalue somewhere so i needa fix that
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Today's Schedule"),
+        title: const Text("Today's Schedule"),
       ),
 
       body: Row( //
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 (TodoList.todoListItems[CalDates.currDate]![3]) ? 
                 const ListTile(
-                  subtitle: Text("get third todo item")
+                  subtitle: Text("+ more events")
                 ) : const ListTile(
                   subtitle: Text("No More Events For Today")
                 )
