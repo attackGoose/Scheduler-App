@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'package:better_calendar_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
@@ -55,10 +56,18 @@ class _HomePageState extends State<HomePage> {
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
               children:  [
-                ListTile("get first todo item"), //i want the icon to be a dot for todo
-                ListTile("get second todo item"),
+                const ListTile(
+                  subtitle: Text("get first todo item")
+                ), //i want the icon to be a dot for todo
+                const ListTile(
+                  subtitle: Text("get second todo item")
+                ),
                 (TodoList.todoListItems[CalDates.currDate]![3]) ? 
-                 ListTile("+ blank more items") : Text("No More Events For Today")
+                const ListTile(
+                  subtitle: Text("get third todo item")
+                ) : const ListTile(
+                  subtitle: Text("No More Events For Today")
+                )
                   
               ],
             )
@@ -111,8 +120,12 @@ class _HomePageState extends State<HomePage> {
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
               children: const [
-                ListTile("get first event item"), //i want the icon to be a star or dash for events
-                ListTile("get second event item") //gets the list of today's events (first 2 upcoming events)
+                ListTile(
+                  subtitle: Text("get first event item")
+                ), //i want the icon to be a star or dash for events
+                ListTile(
+                  subtitle: Text("get second event item")
+                ) //gets the list of today's events (first 2 upcoming events)
               ],
             ),
             ),
