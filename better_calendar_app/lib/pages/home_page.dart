@@ -1,5 +1,7 @@
 // ignore: unused_import
 import 'package:better_calendar_app/main.dart';
+import 'package:better_calendar_app/pages/calendar.dart';
+import 'package:better_calendar_app/pages/date_events.dart';
 import 'package:flutter/material.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +15,7 @@ import 'package:provider/provider.dart';
 //there's a nullvalue somewhere so i needa fix that
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key}); //the class parameters are declared here, like class constructor
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -44,10 +46,10 @@ class _HomePageState extends State<HomePage> {
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: TextButton(
-              onPressed: () {setState() => { //switch the state of the app to calender
-                //have this connect to the calendar page
-                //change screen to calendar
-              };
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const CalendarPage();
+                }
+              ));
               },
               child: const Text("Calendar"),
               ),
@@ -82,10 +84,10 @@ class _HomePageState extends State<HomePage> {
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: TextButton(
-              onPressed: () {setState() => { //switch the state of the app to calender
-                //have this connect to the calendar page
-                //change screen to calendar
-              };
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const EventsPage();
+                }
+              ));
               },
               child: const Text("Events"),
               ),
@@ -110,10 +112,12 @@ class _HomePageState extends State<HomePage> {
             alignment: const Alignment(24, 74), //random numbers, change later
             child: TextButton(
               onPressed: () {
-                setState() => { //switch the state of the app to calender
+                //switch the state of the app to calender
                 //have this connect to the calendar page
                 //change screen to calendar
-              };
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const CalendarPage();
+                }));
               },
               child: const Text("Todos")),
             ),

@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
       child: const MaterialApp(
         //debugShowCheckedModeBanner: false,
         home: HomePage()
-        //error here: unexpected null value, main.dart:38:15
+        //error here: unexpected null value, main.dart:38:15. maybe this has to do witht he providers
       )
     );
   }
