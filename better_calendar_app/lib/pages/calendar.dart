@@ -80,7 +80,8 @@ class _CalendarPageState extends State<CalendarPage> {
           eventLoader: (day) {
             return EventList.getEventsForSelectDay(_focusDay);
           },
-          )
+          
+        )
 
       )
     );

@@ -1,8 +1,10 @@
+// ignore: unused_import
 import 'package:better_calendar_app/pages/date_events.dart';
 import 'package:better_calendar_app/pages/home_page.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// ignore: unused_import
 import 'package:table_calendar/table_calendar.dart';
 
 //this is also the home page of the app
@@ -32,9 +34,9 @@ class MainApp extends StatelessWidget {
       ],
       //have this connect to the home_page.dart page
       child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
+        //debugShowCheckedModeBanner: false,
         home: HomePage()
-
+        //error here: unexpected null value, main.dart:38:15
       )
     );
   }

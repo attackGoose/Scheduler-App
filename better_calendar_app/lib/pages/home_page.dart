@@ -18,6 +18,9 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+//TODO:i need to put something in the setState() functions to fix the error otherwise my page will not work
+
 //https://blog.logrocket.com/creating-multi-page-app-flutter/
 class _HomePageState extends State<HomePage> {
 
