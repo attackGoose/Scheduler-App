@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                 const ListTile(
                   subtitle: Text("get second todo item")
                 ),
-                (TodoList.todoListItems[CalDates.currDate]![3]) ? 
+                (TodoList.todoListItems[CalDates.currDate]![3].isNotEmpty) ? 
                 const ListTile(
                   subtitle: Text("+ more events")
                 ) : const ListTile(

@@ -61,6 +61,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   //        and to reload the widget to impliment these changes
               _selectDay = selectedDay;
               _focusDay = focusDay;
+              CalDates.updateFocusDate(focusDay);
             }
             );
           },

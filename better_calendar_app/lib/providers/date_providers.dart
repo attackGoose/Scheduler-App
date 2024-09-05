@@ -5,17 +5,20 @@ import 'package:intl/intl.dart';
 //and it would also make the backend a connected
 //database in a way.
 
+//for using providers: https://www.youtube.com/watch?v=FUDhozpnTUw
+
 class CalDates extends ChangeNotifier {
 
   //this class stores the days
+  static DateTime selectedDate = DateTime.now();
   static DateTime currDate = DateTime.now();
   final dateFormatter = DateFormat('MM-dd-yyyy');
   late String printToday = dateFormatter.format(currDate);
   
 
-  void updateCurrDate(DateTime day) { 
+  static void updateFocusDate(DateTime day) { 
     //this method isgoing to also be used by the other classes to update the curr date
-    currDate = day; //this is a static variable so no need for the notifylistener() method
+    selectedDate = day; //this is a static variable so no need for the notifylistener() method
   } //use this method to switch between the days in the calendar
 
   //the actual front end app is going to use these methods to have the calender be nice nice
@@ -25,7 +28,8 @@ class CalDates extends ChangeNotifier {
 class TodoList extends ChangeNotifier {
   
   DateTime currDate = CalDates.currDate;
-  static Map<DateTime, List> todoListItems = {};
+
+  static Map<DateTime, List<String>> todoListItems = {};
 
   Map getTodoList(DateTime day) {
     return todoListItems;
@@ -60,17 +64,18 @@ class TodoList extends ChangeNotifier {
 class EventList extends ChangeNotifier {
   DateTime currDate = CalDates.currDate;
   static Map<DateTime, List> events = {};
+
   //the datetime should also contain a time value somewhere
   //day: time: event details
   //make sure that the order is title, Travel time, timeStart, end time, event details
 
-  void addEventItem(DateTime time, List event) {
+  void addEventItem(DateTime time, List event) async { //testing out the async keyword
     //this will be replaced by a LinkedHashMap in the future to improve efficiency
-    events[time]!.add(event);
-    notifyListeners();
+      events[time]!.add(event);
+      notifyListeners();
   }
 
-  void removeEventItem(int time) {
+  void removeEventItem(int time) { 
     events[currDate]![time]!.clear();
     notifyListeners();
   }

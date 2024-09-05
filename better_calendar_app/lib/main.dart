@@ -36,13 +36,13 @@ class MainApp extends StatelessWidget {
       child: const MaterialApp(
         //debugShowCheckedModeBanner: false,
         home: HomePage()
-        //error here: unexpected null value, main.dart:38:15. maybe this has to do witht he providers
+        //error here: unexpected null value, main.dart:38:15. maybe this has to do with the providers
       )
     );
   }
 }
 
-//previous code: will use later as a reference for what to work on later
+//previous code: will use later as a reference for what to maybe add on later
 /*
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -93,9 +93,6 @@ class MyApp extends StatelessWidget {
 //travel time will be approximately {travel time}"
 class AppState extends ChangeNotifier {
   //the button is in the home page under scaffold
-  void getPreviousPage(Widget currentPage) { 
-
-  }
 
   void getSelectionButtons() {
     //do something here to get to the selection list for the user to select either todos or events
@@ -132,13 +129,5 @@ class HomePage extends StatefulWidget {
     )
   } 
 }
-
-
-change of plans, there won't be a selection page, just a calendar, clicking on a day will
-get rid of the calander, bring you to a todo page and a events page you can edit, and top bar
-will show: previous day button, the date of the selected portion, next day button,
-and the bottom left will have a small button that takes you back to the calendar
-events will be right below the top bar, and below events will be a todo list of the day that they can edit
-
 
 */
