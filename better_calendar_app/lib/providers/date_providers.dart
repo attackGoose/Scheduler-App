@@ -69,6 +69,10 @@ class EventList extends ChangeNotifier {
   //day: time: event details
   //make sure that the order is title, Travel time, timeStart, end time, event details
 
+  List? getEventList(DateTime focusDay) {
+    return events[focusDay];
+  }
+
   void addEventItem(DateTime time, List event) async { //testing out the async keyword
     //this will be replaced by a LinkedHashMap in the future to improve efficiency
       events[time]!.add(event);

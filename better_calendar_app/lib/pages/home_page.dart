@@ -134,6 +134,7 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   subtitle: Text("get second event item")
                 ) //gets the list of today's events (first 2 upcoming events)
+                
               ],
             ),
             ),

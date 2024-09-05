@@ -1,4 +1,6 @@
+import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //learn how to create different pages in an app tomorrow, aka front end stuff which is for tmr
 //add a bottom nav bar for this
@@ -14,11 +16,22 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  final DateTime _focusDay = CalDates.selectedDate;
+
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("{Selected Day} Events"),
+      ),
+      body: Column(
+        children: [ //I'll style it later and edit the placements of the events
+          Text(
+            context.watch<EventList>().getEventList(_focusDay) as String //list this out later
+          ) 
+        ],
+      ),
     );
   }
 

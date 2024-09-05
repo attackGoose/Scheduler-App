@@ -23,10 +23,10 @@ class _TodoPageState extends State<TodoPage> {
     return Scaffold(
       //this line will be wrapped with a ton of other stuff to make it organized and nice nice
       appBar: AppBar(
-        title: const Text("{Selected Day} Events"),
+        title: const Text("{Selected Day} Todos"),
       ),
       body: Column(
-        children: [
+        children: [ //I'll style it later and edit the placement of the events so that its not jumbled
           Text(
             context.watch<TodoList>().getTodoList(_focusDayTodo) as String //list this out later
           ) 
