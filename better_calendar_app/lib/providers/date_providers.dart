@@ -67,6 +67,12 @@ class TodoList extends ChangeNotifier {
     todoListItems[currDate] = todoListItems[currDate]! + todoListItems[prevDay]!;
     todoListItems.clear();
   }
+
+  //for the todo page, each day will be limited to a certain amount of todos,
+  //each todo will be during "working time" events
+  //the priority todos (at the top of the ordered list) will be done first, 
+  //rest will be carried to tomorrow on the top of the todo list and get pushed
+  //further down the list if needed to be carried to future dates
 }
 
 class EventList extends ChangeNotifier {
@@ -103,6 +109,10 @@ class EventList extends ChangeNotifier {
   //   //https://www.courier.com/guides/flutter-notifications/
   //   // i'll add in this functionality once I have everything done with
   // }
+
+  //TODO: add functions for schedule management, like time conflicts (if they want
+  //to leave that alone or to resolve it), and additional information. I will impliment this 
+  //tomorrow as my schedule today/saturday is too full and I need a break
 }
 
 
