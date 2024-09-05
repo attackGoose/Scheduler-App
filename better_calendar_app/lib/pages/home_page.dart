@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 
 //this should be used to navigate between the pages
 
-//there's a nullvalue somewhere so i needa fix that
+//TODO: Find the null value in the file cus its the only thing keeping me from testing my code
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key}); //the class parameters are declared here, like class constructor
@@ -21,15 +21,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-//TODO:i need to put something in the setState() functions to fix the error otherwise my page will not work
-
 //https://blog.logrocket.com/creating-multi-page-app-flutter/
 class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var getToday = context.watch<CalDates>();
-    var today = getToday.printToday;
+    DateTime todayDate = context.watch<CalDates>().getCurrDate();
 
     return Scaffold(
       appBar: AppBar(
@@ -102,7 +99,7 @@ class _HomePageState extends State<HomePage> {
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
-            child: Text("Date: $today"),
+            child: Text("Date: $todayDate"),
             ),
             
             //button to take you to the todo page to add or edit tasks

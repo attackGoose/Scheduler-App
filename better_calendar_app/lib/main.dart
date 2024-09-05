@@ -1,9 +1,11 @@
 // ignore: unused_import
 import 'package:better_calendar_app/pages/calendar.dart';
+// ignore: unused_import
 import 'package:better_calendar_app/pages/date_events.dart';
 import 'package:better_calendar_app/pages/home_page.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 // ignore: unused_import
 import 'package:table_calendar/table_calendar.dart';
@@ -21,6 +23,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -35,8 +41,8 @@ class MainApp extends StatelessWidget {
       ],
       //have this connect to the home_page.dart page
       child: const MaterialApp(
+        //theme: , //add this later
         home: HomePage(),
-        title: "someting test",
         //error here: unexpected null value, main.dart:38:15. maybe this has to do with the providers
       )
     );

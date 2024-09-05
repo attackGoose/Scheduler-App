@@ -13,8 +13,15 @@ class CalDates extends ChangeNotifier {
   static DateTime selectedDate = DateTime.now();
   static DateTime currDate = DateTime.now();
   final dateFormatter = DateFormat('MM-dd-yyyy');
-  late String printToday = dateFormatter.format(currDate);
+  late String printToday = dateFormatter.format(selectedDate);
   
+  DateTime getCurrDate () {
+    return currDate;
+  }
+
+  String getSelectedDateInString() {
+    return printToday;
+  }
 
   static void updateFocusDate(DateTime day) { 
     //this method isgoing to also be used by the other classes to update the curr date
