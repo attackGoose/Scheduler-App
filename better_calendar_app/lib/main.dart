@@ -42,6 +42,7 @@ class MainApp extends StatelessWidget {
       //have this connect to the home_page.dart page
       child: const MaterialApp(
         //theme: , //add this later
+        //TODO: add pop methods in calendar, home_page, and todo_page to ensure that there aren't too many layers
         home: HomePage(),
         //error here: unexpected null value, main.dart:38:15. maybe this has to do with the providers
       )

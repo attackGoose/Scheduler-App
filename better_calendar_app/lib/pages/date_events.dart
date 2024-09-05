@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 //this will use the providers as a database and backend for the logic and for abstract programming
 //to make my life easier
 
+//TODO: if two events have a time conflict, put a prompt asking if they would like to
+//replace the previous event, or to simply leave it as is (with the time conflict)
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
 

@@ -36,6 +36,7 @@ class TodoList extends ChangeNotifier {
   
   DateTime currDate = CalDates.currDate;
 
+  //going to switch to a json file later for better storage practices
   static Map<DateTime, List<String>> todoListItems = {};
 
   Map getTodoList(DateTime day) {
