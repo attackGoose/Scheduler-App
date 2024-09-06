@@ -14,15 +14,9 @@ import 'package:provider/provider.dart';
 
 //TODO: Find the null value in the file cus its the only thing keeping me from testing my code
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key}); //the class parameters are declared here, like class constructor
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
 //https://blog.logrocket.com/creating-multi-page-app-flutter/
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
+  const HomePage({super.key}); //the class parameters are declared here, like class constructor
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +29,7 @@ class _HomePageState extends State<HomePage> {
 
       body: Row( //
         children: [
+          //TODO: finish the list items otherwise they won't even show
           
           //first column, has 3 items, button for calendar, list for todo, and button for event
           Column(
@@ -53,24 +48,25 @@ class _HomePageState extends State<HomePage> {
             ),
 
             //todo list
+            //something here is throwing a null value when its not suppose to
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
-              children:  [
-                const ListTile(
+              children: [
+                ListTile(
                   subtitle: Text("get first todo item")
                 ), //i want the icon to be a dot for todo
-                const ListTile(
+                ListTile(
                   subtitle: Text("get second todo item")
-                ),
-                (TodoList.todoListItems[CalDates.currDate]![3].isNotEmpty) ? 
-                const ListTile(
-                  subtitle: Text("+ more events")
-                ) : const ListTile(
-                  subtitle: Text("No More Events For Today")
-                )
+                ), 
+                //TODO: this is returning null for some reason, fix it
+                ListTile(
+                  subtitle: TodoList.finalDisplayStatement(todayDate)
+                ) 
+                //I will impliment a system that makes the amount of todos manageable
+                //with the amount of time available after events later
                   
               ],
             )

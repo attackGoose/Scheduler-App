@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 class CalDates extends ChangeNotifier {
 
   //this class stores the days
-  static DateTime selectedDate = DateTime.now();
+  static DateTime selectedDate = DateTime.now(); //this can change depending on focus day (selected in the calendar page)
   static DateTime currDate = DateTime.now();
   final dateFormatter = DateFormat('MM-dd-yyyy');
   late String printToday = dateFormatter.format(selectedDate);
@@ -62,10 +62,20 @@ class TodoList extends ChangeNotifier {
     notifyListeners();
   }
 
-  //this freaking thing threw up so many errors it took me an hour to fix all of them
   void carryOverTodosFromPrev(DateTime prevDay) {
     todoListItems[currDate] = todoListItems[currDate]! + todoListItems[prevDay]!;
     todoListItems.clear();
+  }
+
+  static int itemsInTodoList(DateTime day) {
+    return todoListItems[day]!.length; //! used in this way basically means that this can not be null
+  }
+
+  static Widget finalDisplayStatement(DateTime day) {
+    int additionalLengthOfList = todoListItems[day]!.length - 2;
+    return (TodoList.itemsInTodoList(day) <= 3) ? 
+                 Text(todoListItems[day]![todoListItems[day]!.length]) : 
+                 Text("+ $additionalLengthOfList more items in todo list scheduled for today");
   }
 
   //for the todo page, each day will be limited to a certain amount of todos,
