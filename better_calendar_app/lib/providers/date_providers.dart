@@ -38,12 +38,11 @@ class CalDates extends ChangeNotifier {
   } //use this method to switch between the days in the calendar
 }
 
-
-// figure out how to only use the dates/months/years in DateTime for the map keys, values will remain as the lists
-// error here is that every DateTime that's saved is different because it records to the very second
-//so i need to figure out how to get it to be only the day/month/year for the error to no longer be there
 //TODO: fix todo list backend (this), we only need the date/month/year and none of the other information that DateTime provides
-//also i need an initial value in the list otherwise this will raise an error (unexpected null value) I think in the front end code
+//because then that will be stored as new information (since every second will be counted as a new key) 
+//and have a new list, which will blow up the program when I try to run it
+//also i need an initial value in the list otherwise this will raise an error (unexpected null value) 
+//I think in the front end code, so figure out how to make it only use mm/dd/yyyy
 class TodoList extends CalDates {
   
   late DateTime currDate; //because each item will be a property of a CalDate, i don't think the map is required
@@ -90,11 +89,14 @@ class TodoList extends CalDates {
   }
 
   static int itemsInTodoList(DateTime day) {
-    return todoListItems[day]!.length; //! used in this way basically means that this can not be null, this blew up my code and i need to fix it
+    return todoListItems[day]!.length; 
+    //! used in this way basically means that this can not be null, 
+    //TODO: this blew up my code and i need to fix it, see top of class for what I think is how to fix it
   }
 
   //TODO: this is still giving an unexpected null value, fix it. this is cus the map its trying to access is empty
 
+  
   String finalDisplayStatement(DateTime day) { 
 
     int LengthOfList = todoListItems[day]!.length - 1; //this is an index of the last item in the list
