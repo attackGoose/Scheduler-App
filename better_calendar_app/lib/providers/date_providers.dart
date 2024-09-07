@@ -38,23 +38,25 @@ class CalDates extends ChangeNotifier {
   } //use this method to switch between the days in the calendar
 }
 
-//TODO: fix todo list backend (this), we only need the date/month/year and none of the other information that DateTime provides
+//TODO: restructure todo list backend (this), we only need the date/month/year and none of the other information that DateTime provides
 //because then that will be stored as new information (since every second will be counted as a new key) 
 //and have a new list, which will blow up the program when I try to run it
 //also i need an initial value in the list otherwise this will raise an error (unexpected null value) 
 //I think in the front end code, so figure out how to make it only use mm/dd/yyyy
+//ideally I want to create different TodoList Objects for different days but this might not be possible
 class TodoList extends CalDates {
   
   late DateTime currDate; //because each item will be a property of a CalDate, i don't think the map is required
-
+  late List<int> dateKey;
   //going to switch to a json file later for better storage practices
-  static Map<DateTime, List<String>> todoListItems = {}; //i need the mm/dd/yyyy only
-
+  static Map<List<int>, List<String>> todoListItems = {}; //i need the mm/dd/yyyy only
+  //the list is mm/dd/yyyy
 
   TodoList({required DateTime date}) {
     //this is to ensure that it doesn't raise an unexpected null error, this should be done for every new date
-    todoListItems[currDate] = ["placeHolder"];
     currDate = date;
+    List<int> dateKey = [currDate.month, currDate.day, currDate.year];
+    todoListItems[dateKey] = []; //makes sure the entry isn't empty so it doesn't blow up my code
   }
   Map getTodoList(DateTime day) {
     return todoListItems;
@@ -62,9 +64,9 @@ class TodoList extends CalDates {
 
   void addToTodoList(String item) {
     //todoListItems[DateTime.now()] = todoListItems[DateTime.now()].add(item);
-    (todoListItems[DateTime.now()] == null) ? todoListItems[DateTime.now()] = [] : todoListItems[DateTime.now()];
+    (todoListItems[dateKey] == null) ? todoListItems[dateKey] = [] : todoListItems[dateKey];
     todoListItems.update(
-      DateTime.now(),
+      dateKey,
       (currTodos) {
         currTodos.add(item);
         return currTodos;
@@ -75,39 +77,41 @@ class TodoList extends CalDates {
   }
 
   void completeToDo(int todoIndexNumber) { //gets rid of completed todos
-    todoListItems[DateTime.now()]!.removeAt(todoIndexNumber);
+    if (todoIndexNumber > todoListItems[dateKey]!.length) {
+      return;
+    }
+    todoListItems[dateKey]!.removeAt(todoIndexNumber);
     notifyListeners();
   }
 
   void addNewDay(DateTime day) {
-    todoListItems[day] = [];
+    List<int> dayKey = [day.month, day.day, day.year];
+    todoListItems[dayKey] = [];
   }
 
   void carryOverTodosFromPrev(DateTime prevDay) {
-    todoListItems[currDate] = todoListItems[currDate]! + todoListItems[prevDay]!;
+    List<int> prevDateKey = [prevDay.month, prevDay.day, prevDay.year];
+    todoListItems[dateKey] = todoListItems[dateKey]! + todoListItems[prevDateKey]!;
     todoListItems.clear();
   }
 
   static int itemsInTodoList(DateTime day) {
-    return todoListItems[day]!.length; 
+    List<int> dayKey = [day.month, day.day, day.year];
+    return todoListItems[dayKey]?.length ?? 0; //if the thing is null or doesn't exist, then it returns 0
     //! used in this way basically means that this can not be null, 
-    //TODO: this blew up my code and i need to fix it, see top of class for what I think is how to fix it
   }
-
-  //TODO: this is still giving an unexpected null value, fix it. this is cus the map its trying to access is empty
-
   
   String finalDisplayStatement(DateTime day) { 
-
-    int LengthOfList = todoListItems[day]!.length - 1; //this is an index of the last item in the list
+    List<int> dayKey = [day.month, day.day, day.year];
+    int lengthOfList = todoListItems[dayKey]!.length - 1; //this is an index of the last item in the list
     //the ! is giving an unexpected null error cus nothign is there
 
     if (itemsInTodoList(day) == 3) {
-      return todoListItems[day]![LengthOfList]; //bad thing about using a ! is that code will self destruct if there's a null value
+      return todoListItems[dayKey]![lengthOfList]; //bad thing about using a ! is that code will self destruct if there's a null value
     } else if (itemsInTodoList(day) < 3) {
       return "";
     } else {
-      return "+ ${LengthOfList-1} more items in todo list scheduled for today";
+      return "+ ${lengthOfList-1} more items in todo list scheduled for today";
     }
     // return ((itemsInTodoList(day) == 3) ? 
     //              todoListItems[day]![todoListItems[day]!.length] : 

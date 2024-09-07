@@ -56,8 +56,9 @@ class HomePage extends StatelessWidget {
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
               children: [
+
                 ListTile(
-                  subtitle: Text("get first todo item")
+                  subtitle: Text("get first todo item"),
                 ), //i want the icon to be a dot for todo
                 ListTile(
                   subtitle: Text("get second todo item")
