@@ -18,8 +18,8 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  DateTime _selectDay = CalDates.currDate;
-  static DateTime _focusDay = CalDates.currDate;
+  DateTime _selectDay = CalDates.selectedDate;
+  static DateTime _focusDay = CalDates.focusDay;
   CalendarFormat _calendarFormat = CalendarFormat.month;
 
   //provider: .read is just to get the value which I can then use, which is what I need
@@ -61,7 +61,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   //        and to reload the widget to impliment these changes
               _selectDay = selectedDay;
               _focusDay = focusDay;
-              CalDates.updateFocusDate(focusDay);
+              CalDates.selectedDate = focusDay;
             }
             );
           },

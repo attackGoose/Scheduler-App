@@ -20,8 +20,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime todayDate = context.watch<CalDates>().getCurrDate();
+    DateTime todayDate = DateTime.now();
 
+    var totItemsInTodoList = TodoList.itemsInTodoList(todayDate);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Today's Schedule"),
@@ -48,7 +49,7 @@ class HomePage extends StatelessWidget {
             ),
 
             //todo list
-            //something here is throwing a null value when its not suppose to
+            //something in the back end
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
@@ -61,10 +62,15 @@ class HomePage extends StatelessWidget {
                 ListTile(
                   subtitle: Text("get second todo item")
                 ), 
-                //TODO: this is returning null for some reason, fix it
-                ListTile(
-                  subtitle: TodoList.finalDisplayStatement(todayDate)
-                ) 
+                // ListTile(
+                //   //I might just make this exist if a more todos exist and just display
+                //   //2 or 3 at a time
+                //   //I think there has to be something in the list for this to not return a null
+                //   title: Text(" items in today's todo list"),
+                //   //try to add a variable amount of these
+                //   //subtitle: Text(TodoList.finalDisplayStatement(todayDate)) //I don't think you can put a conditional statement in a list
+                //   //subtitle: Text("test message")
+                // ) 
                 //I will impliment a system that makes the amount of todos manageable
                 //with the amount of time available after events later
                   

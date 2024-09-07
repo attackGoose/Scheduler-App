@@ -10,35 +10,53 @@ import 'package:intl/intl.dart';
 class CalDates extends ChangeNotifier {
 
   //this class stores the days
-  static DateTime selectedDate = DateTime.now(); //this can change depending on focus day (selected in the calendar page)
+   
+  //this can change depending on focus day (selected in the calendar page)
   static DateTime currDate = DateTime.now();
   final dateFormatter = DateFormat('MM-dd-yyyy');
   late String printToday = dateFormatter.format(selectedDate);
   
+  //for selecting a different day, one checks if its the same day, if it is, do smth, these values change denending on the selected day
+  static DateTime focusDay = DateTime.now();
+  static DateTime selectedDate = DateTime.now();
+
+
+
   DateTime getCurrDate () {
     return currDate;
   }
 
-  String getSelectedDateInString() {
-    return printToday;
+  DateTime getSelectedDate() {
+    return selectedDate;
   }
 
-  static void updateFocusDate(DateTime day) { 
+//not sure if this function is needed or not
+  void updateFocusDate(DateTime day) { 
     //this method isgoing to also be used by the other classes to update the curr date
-    selectedDate = day; //this is a static variable so no need for the notifylistener() method
+    selectedDate = day;
+     //this is a static variable so no need for the notifylistener() method
   } //use this method to switch between the days in the calendar
-
-  //the actual front end app is going to use these methods to have the calender be nice nice
-
 }
 
-class TodoList extends ChangeNotifier {
+
+// figure out how to only use the dates/months/years in DateTime for the map keys, values will remain as the lists
+// error here is that every DateTime that's saved is different because it records to the very second
+//so i need to figure out how to get it to be only the day/month/year for the error to no longer be there
+//TODO: fix todo list backend (this), we only need the date/month/year and none of the other information that DateTime provides
+//also i need an initial value in the list otherwise this will raise an error (unexpected null value) I think in the front end code
+class TodoList extends CalDates {
   
-  DateTime currDate = CalDates.currDate;
+  late DateTime currDate; //because each item will be a property of a CalDate, i don't think the map is required
 
   //going to switch to a json file later for better storage practices
-  static Map<DateTime, List<String>> todoListItems = {};
+  static Map<DateTime, List<String>> todoListItems = {}; //i need the mm/dd/yyyy only
 
+
+  TodoList({required DateTime date}) {
+    //this is to ensure that it doesn't raise an unexpected null error, this should be done for every new date
+    todoListItems[currDate] = ["placeHolder"];
+    currDate = date;
+  }
   Map getTodoList(DateTime day) {
     return todoListItems;
   }
@@ -62,20 +80,36 @@ class TodoList extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addNewDay(DateTime day) {
+    todoListItems[day] = [];
+  }
+
   void carryOverTodosFromPrev(DateTime prevDay) {
     todoListItems[currDate] = todoListItems[currDate]! + todoListItems[prevDay]!;
     todoListItems.clear();
   }
 
   static int itemsInTodoList(DateTime day) {
-    return todoListItems[day]!.length; //! used in this way basically means that this can not be null
+    return todoListItems[day]!.length; //! used in this way basically means that this can not be null, this blew up my code and i need to fix it
   }
 
-  static Widget finalDisplayStatement(DateTime day) {
-    int additionalLengthOfList = todoListItems[day]!.length - 2;
-    return (TodoList.itemsInTodoList(day) <= 3) ? 
-                 Text(todoListItems[day]![todoListItems[day]!.length]) : 
-                 Text("+ $additionalLengthOfList more items in todo list scheduled for today");
+  //TODO: this is still giving an unexpected null value, fix it. this is cus the map its trying to access is empty
+
+  String finalDisplayStatement(DateTime day) { 
+
+    int LengthOfList = todoListItems[day]!.length - 1; //this is an index of the last item in the list
+    //the ! is giving an unexpected null error cus nothign is there
+
+    if (itemsInTodoList(day) == 3) {
+      return todoListItems[day]![LengthOfList]; //bad thing about using a ! is that code will self destruct if there's a null value
+    } else if (itemsInTodoList(day) < 3) {
+      return "";
+    } else {
+      return "+ ${LengthOfList-1} more items in todo list scheduled for today";
+    }
+    // return ((itemsInTodoList(day) == 3) ? 
+    //              todoListItems[day]![todoListItems[day]!.length] : 
+    //              "+ $additionalLengthOfList more items in todo list scheduled for today");
   }
 
   //for the todo page, each day will be limited to a certain amount of todos,
@@ -85,7 +119,7 @@ class TodoList extends ChangeNotifier {
   //further down the list if needed to be carried to future dates
 }
 
-class EventList extends ChangeNotifier {
+class EventList extends CalDates {
   DateTime currDate = CalDates.currDate;
   static Map<DateTime, List> events = {};
 

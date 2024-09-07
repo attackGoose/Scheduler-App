@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => TodoList() //this allows the entire application to use this provider
+          create: (context) => TodoList(date: context.watch<CalDates>().getSelectedDate()) //this allows the entire application to use this provider
         ),
         ChangeNotifierProvider(
           create: (context) => EventList()
