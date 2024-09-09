@@ -9,7 +9,7 @@ import 'package:table_calendar/table_calendar.dart';
 //learn how to create different pages in an app tomorrow, aka front end stuff which is for tmr
 //add a bottom nav bar for this
 
-
+//TODO: maybe the calendar itself can be a list of maps, each map will have a day, month, TodoList object, and EventsList Object
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
