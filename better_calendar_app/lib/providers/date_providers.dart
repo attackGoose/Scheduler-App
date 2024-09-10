@@ -25,8 +25,13 @@ class CalDates extends ChangeNotifier {
   late String printToday = dateFormatter.format(selectedDate);
 
   //for selecting a different day, one checks if its the same day, if it is, do smth, these values change denending on the selected day
-  static DateTime focusDay = DateTime.now();
+  static DateTime focusDate = DateTime.now();
   static DateTime selectedDate = DateTime.now();
+
+  CalDates({DateTime? focusDay, DateTime? selectedDay}) {
+    focusDate = focusDay ?? DateTime.now();
+    selectedDate = selectedDay ?? DateTime.now();
+  }
 
   DateTime getCurrDate() {
     return currDate;
@@ -51,8 +56,7 @@ class CalDates extends ChangeNotifier {
 //I think in the front end code, so figure out how to make it only use mm/dd/yyyy
 //ideally I want to create different TodoList Objects for different days but this might not be possible
 class TodoList extends CalDates {
-  late DateTime
-      currDate; //because each item will be a property of a CalDate, i don't think the map is required
+  late DateTime currDate; //because each item will be a property of a CalDate, i don't think the map is required
   late List<int> dateKey;
   //going to switch to a json file later for better storage practices
   static Map<List<int>, List<String>> todoListItems =
@@ -66,13 +70,15 @@ class TodoList extends CalDates {
     todoListItems[dateKey] =
         []; //makes sure the entry isn't empty so it doesn't blow up my code
   }
-  Map getTodoList(DateTime day) {
-    return todoListItems;
+
+  List<String> getTodoList(DateTime day) {
+    List<int> dayKey = [day.month, day.day, day.year];
+    return todoListItems[dayKey] ?? [];
   }
 
   void addToTodoList(String item) {
     //todoListItems[DateTime.now()] = todoListItems[DateTime.now()].add(item);
-    (todoListItems[dateKey] == null)
+    (todoListItems[dateKey] == null) //checks if it exists
         ? todoListItems[dateKey] = []
         : todoListItems[dateKey];
     todoListItems.update(
@@ -107,18 +113,18 @@ class TodoList extends CalDates {
     todoListItems.clear();
   }
 
-  static int itemsInTodoList(DateTime day) {
+  int itemsInTodoList(DateTime day) {
     List<int> dayKey = [day.month, day.day, day.year];
-    return todoListItems[dayKey]?.length ??
-        0; //if the thing is null or doesn't exist, then it returns 0
+    return todoListItems[dayKey]?.length ?? 0;
+    //if the thing is null or doesn't exist, then it returns 0
     //! used in this way basically means that this can not be null,
   }
 
   String finalDisplayStatement(DateTime day) {
     List<int> dayKey = [day.month, day.day, day.year];
-    int lengthOfList = todoListItems[dayKey]!.length -
-        1; //this is an index of the last item in the list
-    //the ! is giving an unexpected null error cus nothign is there
+    int lengthOfList = todoListItems[dayKey]!.length - 1; 
+    //this is an index of the last item in the list
+    // if this value is null i'm absolutely screwed so thanks to previous code redundancy, it will not be null
 
     if (itemsInTodoList(day) == 3) {
       return todoListItems[dayKey]![

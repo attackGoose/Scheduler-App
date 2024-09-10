@@ -18,11 +18,14 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key}); //the class parameters are declared here, like class constructor
 
+
+
   @override
   Widget build(BuildContext context) {
     DateTime todayDate = DateTime.now();
-
-    var totItemsInTodoList = TodoList.itemsInTodoList(todayDate);
+    TodoList todaysTodo = TodoList(date: todayDate);
+  //access the 
+    //var totItemsInTodoList = TodoList.itemsInTodoList(todayDate);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Today's Schedule"),
@@ -56,25 +59,20 @@ class HomePage extends StatelessWidget {
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
               children: [
-
-                ListTile(
+                const ListTile(
                   subtitle: Text("get first todo item"),
                 ), //i want the icon to be a dot for todo
-                ListTile(
+                const ListTile(
                   subtitle: Text("get second todo item")
                 ), 
-                // ListTile(
-                //   //I might just make this exist if a more todos exist and just display
-                //   //2 or 3 at a time
-                //   //I think there has to be something in the list for this to not return a null
-                //   title: Text(" items in today's todo list"),
-                //   //try to add a variable amount of these
-                //   //subtitle: Text(TodoList.finalDisplayStatement(todayDate)) //I don't think you can put a conditional statement in a list
-                //   //subtitle: Text("test message")
-                // ) 
+                if (todaysTodo.getTodoList(todaysTodo.getCurrDate()).length >= 3) {
+                ListTile(
+                  subtitle: Text("+ ${todaysTodo.itemsInTodoList(todaysTodo.getCurrDate())} more items") 
+                ) 
+                }
                 //I will impliment a system that makes the amount of todos manageable
                 //with the amount of time available after events later
-                  
+                  //https://api.flutter.dev/flutter/material/ListTile-class.html i'll use this transition
               ],
             )
             ),
