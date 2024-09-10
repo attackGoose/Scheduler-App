@@ -92,6 +92,11 @@ class TodoList extends CalDates {
     //just adds an item to the end of that day's todo list, nothing too complicated
   }
 
+  int indexInTodoList(DateTime day, String todo) {
+    List<int> dayKey = [day.month, day.day, day.year];
+    return todoListItems[dayKey]?.indexOf(todo) ?? -1;
+  }
+
   void completeToDo(int todoIndexNumber) {
     //gets rid of completed todos
     if (todoIndexNumber > todoListItems[dateKey]!.length) {

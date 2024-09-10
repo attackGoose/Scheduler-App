@@ -5,6 +5,7 @@ import 'package:better_calendar_app/pages/date_events.dart';
 import 'package:flutter/material.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:provider/provider.dart';
+import 'dart:math';
 //this is th starting screen. "Hello" at the top
 //and "Home" on the appbar
 // below are 3 buttons listed in vertical or
@@ -51,29 +52,38 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            //todo list
-            //something in the back end
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
-              children: [
-                const ListTile(
-                  subtitle: Text("get first todo item"),
-                ), //i want the icon to be a dot for todo
-                const ListTile(
-                  subtitle: Text("get second todo item")
-                ), 
-                if (todaysTodo.getTodoList(todaysTodo.getCurrDate()).length >= 3) {
-                ListTile(
-                  subtitle: Text("+ ${todaysTodo.itemsInTodoList(todaysTodo.getCurrDate())} more items") 
-                ) 
-                }
+              children: 
+              todaysTodo.getTodoList(todaysTodo.getCurrDate()).sublist(0, 3)
+                .map(
+                  (todoItem) => (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) < 3 
+                  && 
+                  todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) > 0) ? ListTile( 
+                    subtitle: Text(todoItem),
+                  ) : ListTile(subtitle: Text("+ ${max(todaysTodo.itemsInTodoList(todaysTodo.getCurrDate()), 0) - 2} items in todo list"))
+                ).toList()
+                
+                // for (String item in todaysTodo.getTodoList(todaysTodo.getCurrDate()))
+                //   if (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), item) != 3 
+                //   && 
+                //   todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), item) != -1) {
+                //     ListTile(
+                //       subtitle: Text(item),
+                //     ), //i want the icon to be a dot for todo
+                //   } else {
+                //     const ListTile(
+                //       subtitle: Text("End of Today's List"),
+                //     ); 
+                //   }
+                
                 //I will impliment a system that makes the amount of todos manageable
                 //with the amount of time available after events later
                   //https://api.flutter.dev/flutter/material/ListTile-class.html i'll use this transition
-              ],
+              ,
             )
             ),
 
