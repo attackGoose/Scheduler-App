@@ -4,6 +4,7 @@ import 'package:better_calendar_app/pages/calendar.dart';
 import 'package:better_calendar_app/pages/date_events.dart';
 import 'package:flutter/material.dart';
 import 'package:better_calendar_app/providers/date_providers.dart';
+// ignore: unused_import
 import 'package:provider/provider.dart';
 import 'dart:math';
 //this is th starting screen. "Hello" at the top
@@ -16,15 +17,21 @@ import 'dart:math';
 //TODO: Find the null value in the file cus its the only thing keeping me from testing my code
 
 //https://blog.logrocket.com/creating-multi-page-app-flutter/
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key}); //the class parameters are declared here, like class constructor
 
+  @override
+  State <HomePage> createState() => _HomePageState();
+} //i'll need this to be a stateful widget to do some cool button stuff
 
+class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
     DateTime todayDate = DateTime.now();
     TodoList todaysTodo = TodoList(date: todayDate);
+
+    EventList todaysEvents = EventList(date: todayDate);
   //access the 
     //var totItemsInTodoList = TodoList.itemsInTodoList(todayDate);
     return Scaffold(
@@ -43,7 +50,8 @@ class HomePage extends StatelessWidget {
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: TextButton(
-              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) {
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const CalendarPage();
                 }
               ));
@@ -58,7 +66,7 @@ class HomePage extends StatelessWidget {
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
               children: 
-              todaysTodo.getTodoList(todaysTodo.getCurrDate()).sublist(0, 3)
+              todaysTodo.getTodoList(todaysTodo.getCurrDate())
                 .map(
                   (todoItem) => (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) < 3 
                   && 
@@ -66,20 +74,7 @@ class HomePage extends StatelessWidget {
                     subtitle: Text(todoItem),
                   ) : ListTile(subtitle: Text("+ ${max(todaysTodo.itemsInTodoList(todaysTodo.getCurrDate()), 0) - 2} items in todo list"))
                 ).toList()
-                
-                // for (String item in todaysTodo.getTodoList(todaysTodo.getCurrDate()))
-                //   if (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), item) != 3 
-                //   && 
-                //   todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), item) != -1) {
-                //     ListTile(
-                //       subtitle: Text(item),
-                //     ), //i want the icon to be a dot for todo
-                //   } else {
-                //     const ListTile(
-                //       subtitle: Text("End of Today's List"),
-                //     ); 
-                //   }
-                
+            
                 //I will impliment a system that makes the amount of todos manageable
                 //with the amount of time available after events later
                   //https://api.flutter.dev/flutter/material/ListTile-class.html i'll use this transition
@@ -92,7 +87,8 @@ class HomePage extends StatelessWidget {
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: TextButton(
-              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) {
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const EventsPage();
                 }
               ));
@@ -135,15 +131,21 @@ class HomePage extends StatelessWidget {
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
-              children: const [
-                ListTile(
-                  subtitle: Text("get first event item")
-                ), //i want the icon to be a star or dash for events
-                ListTile(
-                  subtitle: Text("get second event item")
-                ) //gets the list of today's events (first 2 upcoming events)
-                
-              ],
+              children: 
+              todaysEvents.getEventList(todaysEvents.getCurrDate())
+              //this might need to be redone because the display will be up to datetime.day
+              //while events will be further into daytime.hour or even daytime.minute
+                .map(
+                  (eventItem) => (todaysEvents.getEventList(todaysEvents.currDate).indexOf(eventItem) < 3 
+                  && //second check might not be needed but just incase something goes wrong
+                  todaysEvents.indexInEventList(todaysEvents.currDate, eventItem) > 0) ? ListTile( 
+                    subtitle: Text(eventItem), //this may need to be reformated since it might be a nested list
+                  ) : (todaysEvents.getEventList(todaysEvents.getCurrDate()).isEmpty) ? 
+                  const ListTile(subtitle: Text("No events for today currently, to add an event, go to the events page")) :
+                  ListTile(subtitle: Text("+ ${max(todaysTodo.itemsInTodoList(todaysTodo.getCurrDate()), 0) - 2} more events for today"))
+                ).toList()
+            
+              
             ),
             ),
           ]

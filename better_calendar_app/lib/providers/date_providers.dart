@@ -151,22 +151,32 @@ class TodoList extends CalDates {
   //further down the list if needed to be carried to future dates
 }
 
-class EventList extends CalDates {
+class EventList extends CalDates { //use the same system as todos but with time as well
   DateTime currDate = CalDates.currDate;
-  static Map<DateTime, List> events = {};
-
+  static Map<DateTime, List> events = {}; 
+  
+  //this is fine because we can have the user add in a datetime value to input
+  //the minutes and seconds we'll set to 0 because we want the event to start
+  //at the exact time that something happens
+  //DateTime picked = DateTime(2021, 3, 21); 
   //the datetime should also contain a time value somewhere
   //day: time: event details
   //make sure that the order is title, Travel time, timeStart, end time, event details
 
-  List? getEventList(DateTime focusDay) {
-    return events[focusDay];
+  EventList({required DateTime date}) { //this might need to be changed
+    currDate = date;
+    events[currDate] =
+        []; //sets up an empty array to put in events for later
   }
 
-  void addEventItem(DateTime time, List event) async {
+  List getEventList(DateTime focusDay) {
+    return events[focusDay] ?? [];
+  }
+
+  void addEventItem(DateTime time, List event) {
     //testing out the async keyword
     //this will be replaced by a LinkedHashMap in the future to improve efficiency
-    events[time]!.add(event);
+    events[time]?.add(event);
     notifyListeners();
   }
 
@@ -178,6 +188,10 @@ class EventList extends CalDates {
   //the null thing is really annoying, helpful but annying
   static List getEventsForSelectDay(DateTime day) {
     return events[day]!;
+  }
+
+  int indexInEventList(DateTime day, String event) {
+    return events[day]?.indexOf(event) ?? -1;
   }
 
   // void eventNotify() {
