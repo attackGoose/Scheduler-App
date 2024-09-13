@@ -14,6 +14,9 @@ import 'package:intl/intl.dart';
 //i should have a system for them to all be on the backend, since they're both referencing CalDates for the
 //day key they're getting the info from, i can optionally link it probably
 
+//https://firebase.google.com/docs/flutter/setup?platform=ios
+
+
 class CalDates extends ChangeNotifier {
   //this class stores the days 
   //each day will have a todo and a events list
@@ -177,6 +180,7 @@ class EventList extends CalDates { //use the same system as todos but with time 
     //testing out the async keyword
     //this will be replaced by a LinkedHashMap in the future to improve efficiency
     events[time]?.add(event);
+    
     notifyListeners();
   }
 

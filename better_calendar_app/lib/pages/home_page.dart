@@ -7,14 +7,6 @@ import 'package:better_calendar_app/providers/date_providers.dart';
 // ignore: unused_import
 import 'package:provider/provider.dart';
 import 'dart:math';
-//this is th starting screen. "Hello" at the top
-//and "Home" on the appbar
-// below are 3 buttons listed in vertical or
-//slightly zigzag order or tilted order
-
-//this should be used to navigate between the pages
-
-//TODO: Find the null value in the file cus its the only thing keeping me from testing my code
 
 //https://blog.logrocket.com/creating-multi-page-app-flutter/
 class HomePage extends StatefulWidget {
