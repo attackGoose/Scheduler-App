@@ -32,15 +32,13 @@ class _HomePageState extends State<HomePage> {
       ),
 
       body: Row( //
-        children: [
-          //TODO: finish the list items otherwise they won't even show
-          
+        children: [          
           //first column, has 3 items, button for calendar, list for todo, and button for event
           Column(
           children: [
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
-            alignment: const Alignment(24, 74), //random numbers, change later
+            alignment: Alignment.topLeft, //random numbers, change later
             child: TextButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -56,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
-            alignment: const Alignment(24, 74), //random numbers, change later
+            alignment: Alignment.centerLeft, //random numbers, change later
             //https://stackoverflow.com/questions/50252569/vertical-viewport-was-given-unbounded-height
             child: SizedBox(  //debating whether or not to get rid of this cus its too rigid on the size
               width: 90,
@@ -85,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             //events button
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
-            alignment: const Alignment(24, 74), //random numbers, change later
+            alignment: Alignment.bottomLeft, //random numbers, change later
             child: TextButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -105,7 +103,7 @@ class _HomePageState extends State<HomePage> {
             //prints today's date and styles it
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
-            alignment: const Alignment(24, 74), //random numbers, change later
+            alignment: Alignment.topRight, //random numbers, change later
             child: Text("Date: $todayDate"),
             ),
             
@@ -113,7 +111,7 @@ class _HomePageState extends State<HomePage> {
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
-            alignment: const Alignment(24, 74), //random numbers, change later
+            alignment: Alignment.centerRight, //random numbers, change later
             child: TextButton(
               onPressed: () {
                 //switch the state of the app to calender
@@ -129,7 +127,10 @@ class _HomePageState extends State<HomePage> {
             // text to display the first two upcoming events
             Container(
             color: const Color.fromRGBO(255, 249, 233, 0.694),
-            alignment: const Alignment(24, 74), //random numbers, change later
+            alignment: Alignment.bottomRight, //random numbers, change later
+            padding: const EdgeInsets.all(10.0), //change later
+            //margin: , //add this later
+            //decoration: BoxDecoration(),
             child: ListView(
               shrinkWrap: true,
               children: 
