@@ -8,6 +8,9 @@ import 'package:provider/provider.dart';
 //this will use the providers as a database and backend for the logic and for abstract programming
 //to make my life easier
 
+//I'm going to use a listview widget here to make my life easier and just pull from the 
+//firebase database that i'll store somewhere
+
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
 

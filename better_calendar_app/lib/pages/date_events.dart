@@ -10,6 +10,14 @@ import 'package:provider/provider.dart';
 
 //TODO: if two events have a time conflict, put a prompt asking if they would like to
 //replace the previous event, or to simply leave it as is (with the time conflict)
+
+//NOTES: 
+//todo, make UI design for this page, also look for ways to style this page 
+//with the least amount of effort (effort's gonna go all in debugging) via object
+//tomorrow's task is just to finish makingthe ui/ux and program it onto the app
+//sunday's task is just to get the backend up and running 
+//next week, deploy the app and start on the project that I want to do
+
 class EventsPage extends StatefulWidget {
   const EventsPage({super.key});
 

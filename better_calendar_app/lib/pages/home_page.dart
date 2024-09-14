@@ -46,8 +46,9 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const CalendarPage();
                 }
-              ));
-              },
+              ));},
+              autofocus: true,
+              style: const ButtonStyle(), //style it some later
               child: const Text("Calendar"),
               ),
             ),
