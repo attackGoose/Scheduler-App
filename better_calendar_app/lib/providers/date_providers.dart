@@ -168,8 +168,7 @@ class EventList extends CalDates { //use the same system as todos but with time 
 
   EventList({required DateTime date}) { //this might need to be changed
     currDate = date;
-    events[currDate] =
-        []; //sets up an empty array to put in events for later
+    events[currDate] = []; //sets up an empty array to put in events for later
   }
 
   List getEventList(DateTime focusDay) {

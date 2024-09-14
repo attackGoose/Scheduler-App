@@ -1,5 +1,6 @@
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 //learn how to create different pages in an app tomorrow, aka front end stuff which is for tmr
@@ -26,19 +27,30 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  final DateTime _focusDay = CalDates.selectedDate;
+  DateTime focusDay = CalDates.focusDate; 
+  DateFormat titleFormat = DateFormat("MM-DD-YYYY");
 
+  //use formatting to exclude the last few things for the title (hour, and time)
 
+//saving this as a list for now, events will be stored in chronological order
+//and once clicked, it will show detail of said event
   @override
   Widget build(BuildContext context) {
+    String focusDayTitleFormat = titleFormat.format(focusDay);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("{Selected Day} Events"),
+        title: Text("$focusDayTitleFormat Events"),
       ),
       body: Column(
         children: [ //I'll style it later and edit the placements of the events
-          Text(
-            context.watch<EventList>().getEventList(_focusDay) as String //list this out later
+          ListView(
+            shrinkWrap: true,
+            children: [
+              //add smth here later to list out events
+              
+            ],
+            // context.watch<EventList>().getEventList(focusDay) as String //list this out later
           ) 
         ],
       ),

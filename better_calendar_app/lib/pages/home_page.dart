@@ -57,22 +57,29 @@ class _HomePageState extends State<HomePage> {
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             //style it more later
             alignment: const Alignment(24, 74), //random numbers, change later
-            child: ListView(
-              children: 
-              todaysTodo.getTodoList(todaysTodo.getCurrDate())
-                .map(
-                  (todoItem) => (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) < 3 
-                  && 
-                  todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) > 0) ? ListTile( 
-                    subtitle: Text(todoItem),
-                  ) : ListTile(subtitle: Text("+ ${max(todaysTodo.itemsInTodoList(todaysTodo.getCurrDate()), 0) - 2} items in todo list"))
-                ).toList()
-            
-                //I will impliment a system that makes the amount of todos manageable
-                //with the amount of time available after events later
-                  //https://api.flutter.dev/flutter/material/ListTile-class.html i'll use this transition
-              ,
-            )
+            //https://stackoverflow.com/questions/50252569/vertical-viewport-was-given-unbounded-height
+            child: SizedBox(  //debating whether or not to get rid of this cus its too rigid on the size
+              width: 90,
+              height: 450,
+              child:
+              ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                children: 
+                todaysTodo.getTodoList(todaysTodo.getCurrDate())
+                  .map(
+                    (todoItem) => (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) < 3 
+                    && 
+                    todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) > 0) ? ListTile( 
+                      subtitle: Text(todoItem),
+                    ) : ListTile(subtitle: Text("+ ${max(todaysTodo.itemsInTodoList(todaysTodo.getCurrDate()), 0) - 2} items in todo list"))
+                  ).toList()
+                  //I will impliment a system that makes the amount of todos manageable
+                  //with the amount of time available after events later
+                    //https://api.flutter.dev/flutter/material/ListTile-class.html i'll use this transition
+                ,
+              )
+            ),
             ),
 
             //events button
@@ -124,6 +131,7 @@ class _HomePageState extends State<HomePage> {
             color: const Color.fromRGBO(255, 249, 233, 0.694),
             alignment: const Alignment(24, 74), //random numbers, change later
             child: ListView(
+              shrinkWrap: true,
               children: 
               todaysEvents.getEventList(todaysEvents.getCurrDate())
               //this might need to be redone because the display will be up to datetime.day
@@ -131,7 +139,8 @@ class _HomePageState extends State<HomePage> {
                 .map(
                   (eventItem) => (todaysEvents.getEventList(todaysEvents.currDate).indexOf(eventItem) < 3 
                   && //second check might not be needed but just incase something goes wrong
-                  todaysEvents.indexInEventList(todaysEvents.currDate, eventItem) > 0) ? ListTile( 
+                  todaysEvents.indexInEventList(todaysEvents.currDate, eventItem) > 0) ? 
+                  ListTile( 
                     subtitle: Text(eventItem), //this may need to be reformated since it might be a nested list
                   ) : (todaysEvents.getEventList(todaysEvents.getCurrDate()).isEmpty) ? 
                   const ListTile(subtitle: Text("No events for today currently, to add an event, go to the events page")) :

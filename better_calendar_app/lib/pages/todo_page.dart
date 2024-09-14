@@ -30,8 +30,13 @@ class _TodoPageState extends State<TodoPage> {
       ),
       body: Column(
         children: [ //I'll style it later and edit the placement of the events so that its not jumbled
-          Text(
-            context.watch<TodoList>().getTodoList(_focusDayTodo) as String //list this out later
+          ListView(
+            children: context.watch<TodoList>().getTodoList(_focusDayTodo)
+            .map(
+              (todoItem) => (context.watch<TodoList>().indexInTodoList(_focusDayTodo, todoItem) > 0) 
+              ? ListTile(subtitle: Text(todoItem),) : 
+              const ListTile(subtitle: Text("No more todos for today"),)
+            ).toList()  //list this out later
           ) 
         ],
       ),

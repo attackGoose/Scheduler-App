@@ -85,7 +85,6 @@ class _CalendarPageState extends State<CalendarPage> {
             return EventList.getEventsForSelectDay(_focusDay);
           },
           
-
           //TODO: Finish Calendar Interactivity
         )
 
