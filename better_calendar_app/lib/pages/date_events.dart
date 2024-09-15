@@ -29,6 +29,7 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> {
   DateTime focusDay = CalDates.focusDate; 
   DateFormat titleFormat = DateFormat("MM-DD-YYYY");
+  final TextEditingController _eventController = TextEditingController();
 
   //use formatting to exclude the last few things for the title (hour, and time)
 
@@ -36,22 +37,57 @@ class _EventsPageState extends State<EventsPage> {
 //and once clicked, it will show detail of said event
   @override
   Widget build(BuildContext context) {
-    String focusDayTitleFormat = titleFormat.format(focusDay);
-
+    String focusDayFormatted = titleFormat.format(focusDay);
+    EventList currentEvents = EventList(date: focusDay);
     return Scaffold(
       appBar: AppBar(
-        title: Text("$focusDayTitleFormat Events"),
+        title: Text("$focusDayFormatted Events"),
       ),
       body: Column(
         children: [ //I'll style it later and edit the placements of the events
           ListView(
             shrinkWrap: true,
-            children: [
+            children: const [
               //add smth here later to list out events
-              
+              //also remember to take out the const, added it to make my ide stop
+              //screaming at me
             ],
             // context.watch<EventList>().getEventList(focusDay) as String //list this out later
-          ) 
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                context: context, 
+                builder: (context) {
+                  return AlertDialog(
+                    scrollable: true,
+                    title: const Text("Event Name"),
+                    content: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: TextField(
+                        controller: _eventController, 
+                        //TODO: add more controllers for different parameters 
+                        //that way I can order them in the way that I want in the
+                        //dynamic list that is storing this info temporarily
+
+                      )
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () {
+                            //add events to database and close the prompt
+                            currentEvents.addEventItem(focusDay, [_eventController.text]); 
+                            Navigator.of(context).pop();
+                          }, 
+                          child: const Text("add event"))
+                      ],
+                    );
+                  }
+                );
+            },
+            child: const Icon(Icons.add)
+            
+          ),
         ],
       ),
     );

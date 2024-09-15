@@ -37,7 +37,7 @@ class _TodoPageState extends State<TodoPage> {
               ? ListTile(subtitle: Text(todoItem),) : 
               const ListTile(subtitle: Text("No more todos for today"),)
             ).toList()  //list this out later
-          ) 
+          ),
         ],
       ),
 
