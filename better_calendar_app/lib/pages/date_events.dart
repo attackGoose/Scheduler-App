@@ -1,6 +1,7 @@
 import 'package:better_calendar_app/providers/date_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+// ignore: unused_import
 import 'package:provider/provider.dart';
 
 //learn how to create different pages in an app tomorrow, aka front end stuff which is for tmr
@@ -29,7 +30,8 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> {
   DateTime focusDay = CalDates.focusDate; 
   DateFormat titleFormat = DateFormat("MM-DD-YYYY");
-  final TextEditingController _eventController = TextEditingController();
+  final List<TextEditingController> _eventControllers = [TextEditingController()];
+
 
   //use formatting to exclude the last few things for the title (hour, and time)
 
@@ -64,8 +66,10 @@ class _EventsPageState extends State<EventsPage> {
                     title: const Text("Event Name"),
                     content: Padding(
                       padding: const EdgeInsets.all(8),
-                      child: TextField(
-                        controller: _eventController, 
+                      child: TextField( 
+                        //change of plans, I'm going to add multiple text fields instead rather than adding more controllers
+                        controller: _eventControllers.first,  //change later
+                        
                         //TODO: add more controllers for different parameters 
                         //that way I can order them in the way that I want in the
                         //dynamic list that is storing this info temporarily
@@ -76,7 +80,7 @@ class _EventsPageState extends State<EventsPage> {
                         ElevatedButton(
                           onPressed: () {
                             //add events to database and close the prompt
-                            currentEvents.addEventItem(focusDay, [_eventController.text]); 
+                            currentEvents.addEventItem(focusDay, [_eventController.text]); //fix later
                             Navigator.of(context).pop();
                           }, 
                           child: const Text("add event"))
@@ -93,7 +97,10 @@ class _EventsPageState extends State<EventsPage> {
     );
   }
 
-  void currentTodoItem() { //shows you which todo item you're editing at the current moment
+  void currentEventItem() { //shows you which todo item you're editing at the current moment
 
   } //actually i'll add this in the front end since i can just use a stateful widget and edit it in there
+
+
 }
+

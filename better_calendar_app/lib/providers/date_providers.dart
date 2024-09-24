@@ -175,6 +175,8 @@ class EventList extends CalDates { //use the same system as todos but with time 
     return events[focusDay] ?? [];
   }
 
+  //the event will essentially all come from event controllers 
+  //so I'll do something about that later
   void addEventItem(DateTime time, List event) {
     //testing out the async keyword
     //this will be replaced by a LinkedHashMap in the future to improve efficiency
