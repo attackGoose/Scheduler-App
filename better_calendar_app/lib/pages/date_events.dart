@@ -39,6 +39,9 @@ class _EventsPageState extends State<EventsPage> {
 //and once clicked, it will show detail of said event
   @override
   Widget build(BuildContext context) {
+    bool isNecessaryFieldEmpty = true;
+    List eventItem = []; //this is used as a middleman for the backend
+
     String focusDayFormatted = titleFormat.format(focusDay);
     EventList currentEvents = EventList(date: focusDay);
     return Scaffold(

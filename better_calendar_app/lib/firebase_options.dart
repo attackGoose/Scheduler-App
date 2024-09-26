@@ -85,6 +85,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'allinone-schedule-manager.appspot.com',
     measurementId: 'G-8QHY3X0GZW',
   );
+
 }
 
 //hah linux user (jkjk)
