@@ -41,6 +41,10 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.topLeft, //random numbers, change later
             child: TextButton(
               onPressed: () {
+                Ink(child: InkWell(
+                  onTap: () => {
+                    
+                }),);
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const CalendarPage();
                 }
@@ -52,32 +56,33 @@ class _HomePageState extends State<HomePage> {
             ),
 
             Container(
-            color: const Color.fromRGBO(255, 249, 233, 0.694),
-            //style it more later
-            alignment: Alignment.centerLeft, //random numbers, change later
-            //https://stackoverflow.com/questions/50252569/vertical-viewport-was-given-unbounded-height
-            child: SizedBox(  //debating whether or not to get rid of this cus its too rigid on the size
-              width: 90,
-              height: 450,
-              child:
-              ListView(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                children: 
-                todaysTodo.getTodoList(todaysTodo.getCurrDate())
-                  .map(
-                    (todoItem) => (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) < 3 
-                    && 
-                    todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) > 0) ? ListTile( 
-                      subtitle: Text(todoItem),
-                    ) : ListTile(subtitle: Text("+ ${max(todaysTodo.itemsInTodoList(todaysTodo.getCurrDate()), 0) - 2} items in todo list"))
-                  ).toList()
-                  //I will impliment a system that makes the amount of todos manageable
-                  //with the amount of time available after events later
-                    //https://api.flutter.dev/flutter/material/ListTile-class.html i'll use this transition
-                ,
-              )
-            ),
+              padding: const EdgeInsets.all(10),
+              color: const Color.fromRGBO(255, 249, 233, 0.694),
+              //style it more later
+              alignment: Alignment.centerLeft, //random numbers, change later
+              //https://stackoverflow.com/questions/50252569/vertical-viewport-was-given-unbounded-height
+              child: SizedBox(  //debating whether or not to get rid of this cus its too rigid on the size
+                width: 90,
+                height: 450,
+                child:
+                ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  children: 
+                  todaysTodo.getTodoList(todaysTodo.getCurrDate())
+                    .map(
+                      (todoItem) => (todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) < 3 
+                      && 
+                      todaysTodo.indexInTodoList(todaysTodo.getCurrDate(), todoItem) > 0) ? ListTile( 
+                        subtitle: Text(todoItem),
+                      ) : ListTile(subtitle: Text("+ ${max(todaysTodo.itemsInTodoList(todaysTodo.getCurrDate()), 0) - 2} items in todo list"))
+                    ).toList()
+                    //I will impliment a system that makes the amount of todos manageable
+                    //with the amount of time available after events later
+                      //https://api.flutter.dev/flutter/material/ListTile-class.html i'll use this transition
+                  ,
+                )
+              ),
             ),
 
             //events button

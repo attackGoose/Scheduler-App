@@ -35,6 +35,24 @@ class _EventsPageState extends State<EventsPage> {
 
   //use formatting to exclude the last few things for the title (hour, and time)
 
+/*add for custom ordering of events, on the calendar, drag events, autoupdates time: 
+Draggable(
+  child: Container(
+    width: 100,
+    height: 100,
+    color: Colors.blue,
+    child: Center(child: Text('Drag me')),
+  ),
+  feedback: Container(
+    width: 100,
+    height: 100,
+    color: Colors.blue.withOpacity(0.5),
+    child: Center(child: Text('Dragging')),
+  ),
+  childWhenDragging: Container(),
+)
+*/
+
 //saving this as a list for now, events will be stored in chronological order
 //and once clicked, it will show detail of said event
   @override
@@ -48,14 +66,17 @@ class _EventsPageState extends State<EventsPage> {
       appBar: AppBar(
         title: Text("$focusDayFormatted Events"),
       ),
-      body: Column(
+      /*body: Column(
+        
         children: [ //I'll style it later and edit the placements of the events
+          const SafeArea(child: Text("Placeholder")),
           ListView(
             shrinkWrap: true,
             children: const [
               //add smth here later to list out events
               //also remember to take out the const, added it to make my ide stop
               //screaming at me
+              ListView.custom(childrenDelegate: childrenDelegate)
             ],
             // context.watch<EventList>().getEventList(focusDay) as String //list this out later
           ),
@@ -83,7 +104,7 @@ class _EventsPageState extends State<EventsPage> {
                         ElevatedButton(
                           onPressed: () {
                             //add events to database and close the prompt
-                            currentEvents.addEventItem(focusDay, [_eventController.text]); //fix later
+                            currentEvents.addEventItem(focusDay, currentEventItem()); //fix later
                             Navigator.of(context).pop();
                           }, 
                           child: const Text("add event"))
@@ -96,14 +117,17 @@ class _EventsPageState extends State<EventsPage> {
             
           ),
         ],
-      ),
+      ),*/
     );
   }
 
-  void currentEventItem() { //shows you which todo item you're editing at the current moment
+  /*List currentEventItem() { //shows you which todo item you're editing at the current moment
+    //add the data from the things here and turn it into a list that I can use
+    List eventItem;
 
+    return eventItem | null;
   } //actually i'll add this in the front end since i can just use a stateful widget and edit it in there
 
-
+*/
 }
 
